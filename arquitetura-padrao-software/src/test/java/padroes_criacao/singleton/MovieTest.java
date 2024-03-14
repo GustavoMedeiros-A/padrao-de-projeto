@@ -2,8 +2,6 @@ package padroes_criacao.singleton;
 
 import org.junit.jupiter.api.Test;
 
-import padroes_criacao.singleton.Movie;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MovieTest {

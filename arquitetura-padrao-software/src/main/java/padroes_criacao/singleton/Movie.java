@@ -4,8 +4,8 @@ package padroes_criacao.singleton;
 public class Movie {
 
     public Movie() {
-        getInstance().name = "Carros";
-        getInstance().duration = 116;
+        getInstance().name.equals("Carros");
+        getInstance().duration.equals(116);
     }
 
     private static Movie instance = new Movie(

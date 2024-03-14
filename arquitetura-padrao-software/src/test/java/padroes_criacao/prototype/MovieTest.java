@@ -2,9 +2,6 @@ package padroes_criacao.prototype;
 
 import org.junit.jupiter.api.Test;
 
-import padroes_criacao.prototype.Category;
-import padroes_criacao.prototype.Movie;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MovieTest {
