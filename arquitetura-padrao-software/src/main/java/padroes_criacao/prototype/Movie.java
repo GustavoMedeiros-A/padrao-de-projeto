@@ -1,6 +1,6 @@
-package padrao_criacao.prototype;
+package padroes_criacao.prototype;
 
-public class Movie implements Cloneable{
+public class Movie implements Cloneable {
     private String name;
     private Integer duration;
     private Category category;
@@ -10,6 +10,7 @@ public class Movie implements Cloneable{
         this.duration = duration;
         this.category = category;
     }
+
     public String getName() {
         return name;
     }
@@ -17,6 +18,7 @@ public class Movie implements Cloneable{
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getDuration() {
         return duration;
     }
@@ -48,6 +50,5 @@ public class Movie implements Cloneable{
                 ", category=" + category +
                 '}';
     }
-
 
 }

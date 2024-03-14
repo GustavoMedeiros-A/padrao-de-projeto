@@ -1,5 +1,5 @@
 
-package padrao_criacao.singleton;
+package padroes_criacao.singleton;
 
 public class Movie {
 

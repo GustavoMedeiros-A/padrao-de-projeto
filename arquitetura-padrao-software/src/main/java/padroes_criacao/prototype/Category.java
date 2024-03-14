@@ -1,9 +1,8 @@
-package padrao_criacao.prototype;
+package padroes_criacao.prototype;
 
 public class Category implements Cloneable {
     private String name;
     private String description;
-
 
     public Category(String name, String description) {
         this.name = name;
@@ -35,7 +34,7 @@ public class Category implements Cloneable {
     public String toString() {
         return "Category{" +
                 "name='" + name + '\'' +
-                ", description='" + description + '\''+
+                ", description='" + description + '\'' +
                 '}';
     }
 

@@ -1,6 +1,9 @@
-package padrao_criacao.prototype;
+package padroes_criacao.prototype;
 
 import org.junit.jupiter.api.Test;
+
+import padroes_criacao.prototype.Category;
+import padroes_criacao.prototype.Movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,13 +31,13 @@ class MovieTest {
                                 movie.toString());
 
                 assertEquals(
-                        "Movie {" +
-                                "name=Movie2, " +
-                                "duration=20, " +
-                                "category=Category{" +
-                                "name='New category', " +
-                                "description='New description'}}",
-                        movieClone.toString());
+                                "Movie {" +
+                                                "name=Movie2, " +
+                                                "duration=20, " +
+                                                "category=Category{" +
+                                                "name='New category', " +
+                                                "description='New description'}}",
+                                movieClone.toString());
         };
 
 }
