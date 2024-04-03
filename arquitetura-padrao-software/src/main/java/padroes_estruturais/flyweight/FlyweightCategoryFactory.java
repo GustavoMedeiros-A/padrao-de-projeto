@@ -10,7 +10,8 @@ public class FlyweightCategoryFactory {
     public static Category getCategory(String name, String description) {
         var category = categories.get(name);
         if (category == null) {
-            category = categories.put(name, new Category(name, description));
+            category = new Category(name, description);
+            categories.put(name, category);
         }
         return category;
     }

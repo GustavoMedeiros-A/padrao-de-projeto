@@ -16,8 +16,14 @@ class CatalogTest {
 
         List<String> movies = Arrays.asList(
                 "Movie{name='Duna', category='Action', description='Action movie'}");
-
         assertEquals(movies, catalog.getMovies());
+    }
 
+    @Test
+    void shouldReturnQuantityMovies() {
+        var catalog = new Catalog();
+        catalog.addMovie("Duna", "Action", "Action movie");
+
+        assertEquals(1, FlyweightCategoryFactory.categorySize());
     }
 }
