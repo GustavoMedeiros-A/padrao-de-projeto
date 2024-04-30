@@ -33,8 +33,9 @@ public class ClientTest {
     void shouldCancelStream() {
         Subscription openStreaming = new SignStreaming(stream, "Cancel");
         client.addSubs(openStreaming);
+        client.removeLastSub();
 
-        assertEquals("Sign Streaming", stream.getStatus());
+        assertEquals("Cancel Streaming", stream.getStatus());
     }
 
 }
