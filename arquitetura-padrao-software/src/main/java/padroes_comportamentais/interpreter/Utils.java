@@ -16,6 +16,5 @@ public final class Utils {
             expression.append(product.getQuantity()).append(" * ").append(product.getPrice());
         }
         return expression.toString();
-
     }
 }

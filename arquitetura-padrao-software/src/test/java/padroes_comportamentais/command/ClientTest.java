@@ -1,14 +1,9 @@
-package padroes_comportamentais;
+package padroes_comportamentais.command;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import padroes_comportamentais.command.Client;
-import padroes_comportamentais.command.SignStreaming;
-import padroes_comportamentais.command.Streaming;
-import padroes_comportamentais.command.Subscription;
 
 public class ClientTest {
 

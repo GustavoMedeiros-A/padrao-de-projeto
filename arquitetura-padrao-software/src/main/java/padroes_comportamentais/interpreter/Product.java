@@ -1,5 +1,8 @@
 package padroes_comportamentais.interpreter;
 
+import padroes_comportamentais.interpreter.expression.InterpreterExpression;
+import padroes_comportamentais.interpreter.expression.InterpreterExpressionArithmetic;
+
 public class Product {
     public int price;
     public String name;
@@ -11,6 +14,8 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public static String formula = "price * quantity - 1 / 2";
+
     public int getPrice() {
         return price;
     }
@@ -21,6 +26,15 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public static double calcProductWithDiscount(double price, double quantity) {
+        String expression;
+        Boolean isDiscount = true;
+        expression = formula.replace("price", Double.toString(price));
+        expression = expression.replace("quantity", Double.toString(quantity));
+        InterpreterExpression interpreter = new InterpreterExpressionArithmetic(expression, isDiscount);
+        return interpreter.interpreter();
     }
 
     @Override
