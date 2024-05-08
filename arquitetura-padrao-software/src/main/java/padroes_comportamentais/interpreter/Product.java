@@ -1,17 +1,17 @@
 package padroes_comportamentais.interpreter;
 
 public class Product {
-    private Double price;
-    private String name;
-    private int quantity;
+    public int price;
+    public String name;
+    public int quantity;
 
-    public Product(Double price, String name, int quantity) {
+    public Product(int price, String name, int quantity) {
         this.price = price;
         this.name = name;
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 

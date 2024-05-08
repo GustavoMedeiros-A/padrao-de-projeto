@@ -21,9 +21,4 @@ public class Client {
         return "Client{name='" + name + "'\n, Products=[" + String.join(", ", productDescriptions) + "]}";
     }
 
-    // @Override
-    // public String toString() {
-    // return "Product{name='" + name + "', price=" + price + ", quantity=" +
-    // quantity + "}";
-    // }
 }
