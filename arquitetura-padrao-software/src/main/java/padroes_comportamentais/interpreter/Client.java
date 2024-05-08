@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import padroes_comportamentais.interpreter.expression.InterpreterExpression;
-import padroes_comportamentais.interpreter.expression.InterpreterExpressionArithmetic;
-
 public class Client {
     private String name;
     private ArrayList<Product> products;

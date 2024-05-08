@@ -65,6 +65,10 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 throw new IllegalArgumentException("Expression with invalid element");
             }
         }
+        if (stackInterpreter.size() == 1) {
+            initialInterpreter = stackInterpreter.pop();
+        }
+
         if (!stackInterpreter.isEmpty() && discount == false) {
             Number result = (Number) stackInterpreter.pop();
             while (!stackInterpreter.isEmpty()) {
@@ -74,7 +78,6 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
             }
             initialInterpreter = result;
         }
-        initialInterpreter = stackInterpreter.pop();
     }
 
     public double interpreter() {

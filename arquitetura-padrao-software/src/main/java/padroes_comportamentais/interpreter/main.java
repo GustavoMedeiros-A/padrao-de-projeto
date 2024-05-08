@@ -20,7 +20,8 @@ public class main {
         System.out.println(client.toString());
         System.out.println("\n" + productConverter);
 
-        var interpreter = new InterpreterExpressionArithmetic(productConverter, false);
+        var interpreter = new InterpreterExpressionArithmetic(productConverter,
+                false);
         System.out.println(interpreter.interpreter());
 
         var interpreter2 = new InterpreterExpressionArithmetic("6 - 2", false);

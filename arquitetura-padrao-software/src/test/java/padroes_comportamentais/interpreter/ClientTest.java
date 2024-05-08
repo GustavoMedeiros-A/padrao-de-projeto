@@ -2,6 +2,8 @@ package padroes_comportamentais.interpreter;
 
 import org.junit.jupiter.api.Test;
 
+import padroes_comportamentais.interpreter.expression.InterpreterExpressionArithmetic;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -40,6 +42,21 @@ public class ClientTest {
         assertResults.add(4.5);
         assertEquals(assertResults, discounts);
 
+    }
+
+    @Test
+    void shoundCalculateTheFinalValueOfProductList() {
+        var popcorn = new Popcorn(7, "popcorn", 2);
+        var soda = new Soda(3, "coca", 2);
+        var soda2 = new Soda(3, "guarana", 4);
+        var products = new ArrayList<Product>();
+        products.add(popcorn);
+        products.add(soda);
+        products.add(soda2);
+        var utils = new Utils();
+        var productConverter = utils.converterExpression(products);
+        var interpreter = new InterpreterExpressionArithmetic(productConverter, false);
+        assertEquals(32.0, interpreter.interpreter());
     }
 
 }
