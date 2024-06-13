@@ -3,16 +3,17 @@ package padroes_criacao.singleton;
 
 public class Movie {
 
-    public Movie() {
-        getInstance().name.equals("Carros");
-        getInstance().duration.equals(116);
+    private Movie() {
     }
 
-    private static Movie instance = new Movie(
-
-    );
+    private static Movie instance;
 
     public static Movie getInstance() {
+        if (instance == null) {
+            instance = new Movie();
+            instance.name = "Carros";
+            instance.duration = 116;
+        }
         return instance;
     }
 
