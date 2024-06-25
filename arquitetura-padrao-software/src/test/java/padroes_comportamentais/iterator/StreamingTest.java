@@ -19,6 +19,7 @@ public class StreamingTest {
 
     @Test
     void shouldCountAllCategories() {
+        var test = new Streaming();
         Movie movie = new Movie(
                 new Category("KarateKid", false),
                 new Category("Duna", false),

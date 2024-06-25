@@ -10,20 +10,8 @@ public class Category {
         this.isHorror = isHorror;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean isHorror() {
         return isHorror;
-    }
-
-    public void setIsHorror(boolean isHorror) {
-        this.isHorror = isHorror;
     }
 
 }

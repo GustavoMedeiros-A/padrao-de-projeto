@@ -29,4 +29,13 @@ public class AdventureTest {
         var adventure = new Adventure();
         assertEquals("Loading adventure storyline and characters...", adventure.loadingGame());
     }
+
+    @Test
+    void shouldPlayGame() {
+        Adventure adventure = new Adventure();
+        adventure.play();
+        assertEquals("Game init", adventure.initializeGame());
+        assertEquals("Game start", adventure.start());
+        assertEquals("Game pause", adventure.pause());
+    }
 }

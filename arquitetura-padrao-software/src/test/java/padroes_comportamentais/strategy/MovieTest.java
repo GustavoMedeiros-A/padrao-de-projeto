@@ -30,4 +30,11 @@ public class MovieTest {
         assertEquals(80.00, movie.calculationPriceWithDiscount(movie.getPrice()));
     }
 
+    @Test
+    void shouldReturnOriginalPriceWhenNoDiscountStrategy() {
+        Movie movie = new Movie("Duna", 100.0);
+
+        assertEquals(100.00, movie.calculationPriceWithDiscount(movie.getPrice()));
+    }
+
 }

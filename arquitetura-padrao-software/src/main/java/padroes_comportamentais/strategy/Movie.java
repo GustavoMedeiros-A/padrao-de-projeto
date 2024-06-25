@@ -23,10 +23,6 @@ public class Movie {
         return price;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public double getPrice() {
         return price;
     }

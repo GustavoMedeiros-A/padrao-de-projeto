@@ -63,7 +63,7 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
             }
         }
 
-        if (!stackInterpreter.isEmpty() && !discount) { // $COVERAGE-IGNORE$
+        if (!discount) {
             Number result = (Number) stackInterpreter.pop();
             while (!stackInterpreter.isEmpty()) {
                 Number nextNumber = (Number) stackInterpreter.pop();
@@ -71,7 +71,7 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 result = new Number(sum.interpreter());
             }
             initialInterpreter = result;
-        } else if (!stackInterpreter.isEmpty() && discount) { // $COVERAGE-IGNORE$
+        } else {
             if (stackInterpreter.size() > 1) {
                 throw new IllegalArgumentException("Invalid Expression");
             }

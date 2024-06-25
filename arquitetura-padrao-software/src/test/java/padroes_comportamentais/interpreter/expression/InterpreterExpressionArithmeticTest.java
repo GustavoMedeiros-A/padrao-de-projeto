@@ -145,15 +145,6 @@ public class InterpreterExpressionArithmeticTest {
     }
 
     @Test
-    void testExpressionWithMultipleNumbersWithDiscount() {
-        String expression = "10 5 3";
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new InterpreterExpressionArithmetic(expression, true);
-        });
-        assertEquals("Invalid Expression", exception.getMessage());
-    }
-
-    @Test
     void testSingleElementWithDiscount2() {
         String expression = "10";
         InterpreterExpressionArithmetic interpreter = new InterpreterExpressionArithmetic(expression, true);
@@ -221,12 +212,37 @@ public class InterpreterExpressionArithmeticTest {
     }
 
     @Test
-    void testSingleElementWithDiscount21() {
-        // This test should cover the branch else if (!stackInterpreter.isEmpty() &&
-        // discount)
+    void testExpressionWithMultipleNumbersWithDiscoun2t() {
+        String expression = "10 5";
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new InterpreterExpressionArithmetic(expression, true);
+        });
+        assertEquals("Invalid Expression", exception.getMessage());
+    }
+
+    @Test
+    void testExpressionWithSingleElementAndNoDiscount() {
         String expression = "10";
-        InterpreterExpressionArithmetic interpreter = new InterpreterExpressionArithmetic(expression, true);
+        InterpreterExpressionArithmetic interpreter = new InterpreterExpressionArithmetic(expression, false);
         assertEquals(10.0, interpreter.interpreter());
+    }
+
+    @Test
+    void testExpressionWithMultipleNumbersWithDiscount() {
+        String expression = "10 5";
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new InterpreterExpressionArithmetic(expression, true);
+        });
+        assertEquals("Invalid Expression", exception.getMessage());
+    }
+
+    // Test to specifically cover the branch where !stackInterpreter.isEmpty() &&
+    // !discount
+    @Test
+    void testRemainingElementsWithoutDiscount() {
+        String expression = "10 5 3";
+        InterpreterExpressionArithmetic interpreter = new InterpreterExpressionArithmetic(expression, false);
+        assertEquals(18.0, interpreter.interpreter()); // This will ensure remaining elements are summed
     }
 
 }
