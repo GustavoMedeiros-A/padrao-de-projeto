@@ -9,14 +9,6 @@ public abstract class PopcornDecorator implements Popcorn {
         this.popcorn = popcorn;
     }
 
-    public Popcorn getPopcorn() {
-        return popcorn;
-    }
-
-    public void setPopcorn(Popcorn popcorn) {
-        this.popcorn = popcorn;
-    }
-
     public abstract float getPopcornPricePercentage();
 
     public float getPopcornPrice() {
@@ -27,10 +19,6 @@ public abstract class PopcornDecorator implements Popcorn {
 
     public String getStructure() {
         return this.popcorn.getStructure() + "/" + this.getStructureName();
-    }
-
-    public void setStructure(String newStructure) {
-        this.structure = newStructure;
     }
 
 }

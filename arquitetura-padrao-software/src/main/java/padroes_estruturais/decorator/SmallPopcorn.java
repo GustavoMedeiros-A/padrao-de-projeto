@@ -4,9 +4,6 @@ public class SmallPopcorn implements Popcorn {
 
     public float popcornPrice;
 
-    public SmallPopcorn() {
-    }
-
     public SmallPopcorn(float popcornPrice) {
         this.popcornPrice = popcornPrice;
     }

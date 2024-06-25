@@ -9,14 +9,6 @@ public class Movie extends Category {
         this.stars = stars;
     }
 
-    public int getStars() {
-        return stars;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
-    }
-
     public String getCategory() {
         return "Movie: " + this.getName() + " - stars: " + this.stars + "\n";
     }

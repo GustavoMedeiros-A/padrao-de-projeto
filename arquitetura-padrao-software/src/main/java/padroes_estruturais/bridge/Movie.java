@@ -13,10 +13,6 @@ public abstract class Movie {
         this.category = category;
     }
 
-    public void setBaseSalary(float baseSalary) {
-        this.baseSalary = baseSalary;
-    }
-
     public abstract float calcSalary();
 
 }

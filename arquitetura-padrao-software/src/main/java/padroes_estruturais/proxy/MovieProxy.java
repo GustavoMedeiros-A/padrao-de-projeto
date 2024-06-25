@@ -15,6 +15,7 @@ public class MovieProxy implements IMovie {
     public List<String> getInformation() {
         if (this.movie == null) {
             this.movie = new Movie(this.id);
+
         }
         return this.movie.getInformation();
     }
@@ -28,5 +29,9 @@ public class MovieProxy implements IMovie {
             this.movie = new Movie(this.id);
         }
         return this.movie.watchMovie(user);
+    }
+
+    protected Movie getMovie() {
+        return this.movie;
     }
 }

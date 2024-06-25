@@ -11,16 +11,8 @@ public class Movie implements Cloneable {
         this.category = category;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getDuration() {
-        return duration;
     }
 
     public void setDuration(Integer duration) {
@@ -29,10 +21,6 @@ public class Movie implements Cloneable {
 
     public Category getCategory() {
         return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     @Override

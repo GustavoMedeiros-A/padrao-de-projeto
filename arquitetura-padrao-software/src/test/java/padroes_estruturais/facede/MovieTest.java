@@ -3,34 +3,53 @@ package padroes_estruturais.facede;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
 
 class MovieTest {
 
-    @Test
-    void shoudReturnSoundPendeciesRelease() {
-        Movie movie = new Movie();
-        Sound sound = Sound.getInstance();
+    private Movie movie;
+    private Sound sound;
+    private Video video;
 
+    @BeforeEach
+    void setUp() {
+        var test = new MovieFacete();
+        movie = new Movie();
+        sound = Sound.getInstance();
+        video = Video.getInstance();
+
+        sound.addMovieWithPendecies(new Movie());
+        video.addMovieWithPendecies(new Movie());
+    }
+
+    @Test
+    void shouldReleaseMovieWhenNoPendingIssues() {
+        assertFalse(movie.release());
+    }
+
+    @Test
+    void shouldNotReleaseMovieWhenPendingIssuesInSound() {
         sound.addMovieWithPendecies(movie);
 
-        assertEquals(true, movie.release());
+        assertTrue(movie.release());
     }
 
     @Test
-    void shoudReturnVideoPendeciesRelease() {
-        Movie movie = new Movie();
-        Video video = Video.getInstance();
-
+    void shouldNotReleaseMovieWhenPendingIssuesInVideo() {
         video.addMovieWithPendecies(movie);
 
-        assertEquals(true, movie.release());
+        assertTrue(movie.release());
     }
 
     @Test
-    void shouldReturnRealeaseMovie() {
-        Movie movie = new Movie();
+    void shouldNotReleaseMovieWhenPendingIssuesInBothSoundAndVideo() {
+        sound.addMovieWithPendecies(movie);
+        video.addMovieWithPendecies(movie);
 
-        assertEquals(false, movie.release());
+        assertTrue(movie.release());
     }
 
 }

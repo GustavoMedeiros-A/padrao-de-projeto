@@ -3,27 +3,50 @@ package padroes_estruturais.flyweight;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CatalogTest {
 
-    @Test
-    void shouldReturnMovies() {
-        var catalog = new Catalog();
-        catalog.addMovie("Duna", "Action", "Action movie");
+    private Catalog catalog;
 
-        List<String> movies = Arrays.asList(
-                "Movie{name='Duna', category='Action', description='Action movie'}");
-        assertEquals(movies, catalog.getMovies());
+    @BeforeEach
+    void setUp() {
+        catalog = new Catalog();
     }
 
     @Test
-    void shouldReturnQuantityMovies() {
-        var catalog = new Catalog();
-        catalog.addMovie("Duna", "Action", "Action movie");
+    void shouldAddMoviesAndVerifyFlyweightPattern() {
+        catalog.addMovie("Movie 1", "Action", "Action-packed movie");
+        catalog.addMovie("Movie 2", "Action", "Action-packed movie");
+        catalog.addMovie("Movie 3", "Drama", "Dramatic storyline");
 
-        assertEquals(1, FlyweightCategoryFactory.categorySize());
+        List<String> movies = catalog.getMovies();
+
+        assertEquals(3, movies.size());
+        assertTrue(movies.contains("Movie{name='Movie 1', category='Action', description='Action-packed movie'}"));
+        assertTrue(movies.contains("Movie{name='Movie 2', category='Action', description='Action-packed movie'}"));
+        assertTrue(movies.contains("Movie{name='Movie 3', category='Drama', description='Dramatic storyline'}"));
+
+        // Verify that only 2 categories were created due to flyweight pattern
+        assertEquals(2, FlyweightCategoryFactory.categorySize());
+    }
+
+    @Test
+    void shouldReuseExistingCategory() {
+        catalog.addMovie("Movie 1", "Action", "Action-packed movie");
+        catalog.addMovie("Movie 2", "Action", "Action-packed movie");
+
+        List<String> movies = catalog.getMovies();
+
+        assertEquals(2, movies.size());
+        assertTrue(movies.contains("Movie{name='Movie 1', category='Action', description='Action-packed movie'}"));
+        assertTrue(movies.contains("Movie{name='Movie 2', category='Action', description='Action-packed movie'}"));
+
+        var test = new FlyweightCategoryFactory();
+        assertEquals(2, FlyweightCategoryFactory.categorySize());
     }
 }

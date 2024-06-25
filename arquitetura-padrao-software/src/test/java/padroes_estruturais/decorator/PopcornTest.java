@@ -7,55 +7,67 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PopcornTest {
 
     @Test
-    void shouldReturnPopcornPrice() {
-        Popcorn popcorn = new SmallPopcorn(1000.0f);
-
-        assertEquals(1000.f, popcorn.getPopcornPrice());
+    void shouldReturnSmallPopcornPrice() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        assertEquals(5.0f, smallPopcorn.getPopcornPrice());
     }
 
     @Test
-    void shouldReturnPopcornPriceWithSweet() {
-        Popcorn popcorn = new SweetPopcorn(new SmallPopcorn(1000.0f));
-
-        assertEquals(1100.f, popcorn.getPopcornPrice());
+    void shouldReturnSmallPopcornStructure() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        assertEquals("SmallPopcorn", smallPopcorn.getStructure());
     }
 
     @Test
-    void shouldReturnPopcornPriceWithSoda() {
-        Popcorn popcorn = new SodaPopcorn(new SmallPopcorn(1000.0f));
+    void shouldReturnSweetPopcornPrice() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SweetPopcorn sweetPopcorn = new SweetPopcorn(smallPopcorn);
 
-        assertEquals(1200.f, popcorn.getPopcornPrice());
+        float expectedPrice = 5.0f * 1.10f; // base price * (1 + 10% increase)
+        assertEquals(expectedPrice, sweetPopcorn.getPopcornPrice());
     }
 
     @Test
-    void shouldReturnPopcornPriceWithSodaAndSweet() {
-        Popcorn popcorn = new SodaPopcorn(new SweetPopcorn(new SmallPopcorn(1000.0f)));
+    void shouldReturnSweetPopcornStructure() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SweetPopcorn sweetPopcorn = new SweetPopcorn(smallPopcorn);
 
-        assertEquals(1320.f, popcorn.getPopcornPrice());
+        assertEquals("SmallPopcorn/SweetPopcorn", sweetPopcorn.getStructure());
     }
 
     @Test
-    void shouldReturnPopcornStructure() {
-        Popcorn popcorn = new SmallPopcorn();
+    void shouldReturnSodaPopcornPrice() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SodaPopcorn sodaPopcorn = new SodaPopcorn(smallPopcorn);
 
-        assertEquals("SmallPopcorn", popcorn.getStructure());
+        float expectedPrice = 5.0f * 1.20f; // base price * (1 + 20% increase)
+        assertEquals(expectedPrice, sodaPopcorn.getPopcornPrice());
     }
 
     @Test
-    void shouldReturnPopcornStructureWithSweet() {
-        Popcorn popcorn = new SweetPopcorn(new SmallPopcorn());
-        assertEquals("SmallPopcorn/SweetPopcorn", popcorn.getStructure());
+    void shouldReturnSodaPopcornStructure() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SodaPopcorn sodaPopcorn = new SodaPopcorn(smallPopcorn);
+
+        assertEquals("SmallPopcorn/SodaPopcorn", sodaPopcorn.getStructure());
     }
 
     @Test
-    void shouldReturnPopcornStructureWithSoda() {
-        Popcorn popcorn = new SweetPopcorn(new SmallPopcorn());
-        assertEquals("SmallPopcorn/SweetPopcorn", popcorn.getStructure());
+    void shouldReturnSweetAndSodaPopcornPrice() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SweetPopcorn sweetPopcorn = new SweetPopcorn(smallPopcorn);
+        SodaPopcorn sodaPopcorn = new SodaPopcorn(sweetPopcorn);
+
+        float expectedPrice = 5.0f * 1.10f * 1.20f; // base price * (1 + 10% increase) * (1 + 20% increase)
+        assertEquals(expectedPrice, sodaPopcorn.getPopcornPrice());
     }
 
     @Test
-    void shouldReturnPopcornStructureWithSweetAndSoda() {
-        Popcorn popcorn = new SweetPopcorn(new SodaPopcorn(new SmallPopcorn()));
-        assertEquals("SmallPopcorn/SodaPopcorn/SweetPopcorn", popcorn.getStructure());
+    void shouldReturnSweetAndSodaPopcornStructure() {
+        SmallPopcorn smallPopcorn = new SmallPopcorn(5.0f);
+        SweetPopcorn sweetPopcorn = new SweetPopcorn(smallPopcorn);
+        SodaPopcorn sodaPopcorn = new SodaPopcorn(sweetPopcorn);
+
+        assertEquals("SmallPopcorn/SweetPopcorn/SodaPopcorn", sodaPopcorn.getStructure());
     }
 }
