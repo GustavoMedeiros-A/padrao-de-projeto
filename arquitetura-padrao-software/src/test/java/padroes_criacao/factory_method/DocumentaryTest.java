@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class ContentDocumentaryTest {
+public class DocumentaryTest {
     @Test
     void shouldStartDocumentary() {
         IMovieContent documentary = MovieContentFactory.getContent("Documentary");

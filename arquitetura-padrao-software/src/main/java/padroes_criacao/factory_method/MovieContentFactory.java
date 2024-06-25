@@ -11,9 +11,6 @@ public class MovieContentFactory {
         } catch (Exception e) {
             throw new IllegalArgumentException("nonexistent content");
         }
-        if (!(object instanceof IMovieContent)) {
-            throw new IllegalArgumentException("invalid content");
-        }
 
         return (IMovieContent) object;
     }
