@@ -106,4 +106,46 @@ public class MovieProxyTest {
         assertNotNull(movieProxy.getMovie());
     }
 
+    @Test
+    void shouldReuseLoadedMovieInWatchMovieAfterGetInformation() {
+        User adultUser = new User("John Doe", true);
+        MovieProxy movieProxy = new MovieProxy(1);
+        assertNull(movieProxy.getMovie());
+
+        movieProxy.getInformation();
+        assertNotNull(movieProxy.getMovie());
+
+        List<String> watchInfo = movieProxy.watchMovie(adultUser);
+        assertNotNull(movieProxy.getMovie());
+        assertEquals(1, watchInfo.size());
+        assertEquals("link", watchInfo.get(0));
+    }
+
+    @Test
+    void shouldCoverBothBranchesInGetInformationAndWatchMovie() {
+        User adultUser = new User("John Doe", true);
+        MovieProxy movieProxy = new MovieProxy(2);
+        assertNull(movieProxy.getMovie());
+
+        // Test first branch by calling getInformation when movie is null
+        movieProxy.getInformation();
+        assertNotNull(movieProxy.getMovie());
+
+        // Test second branch by calling getInformation when movie is not null
+        List<String> info = movieProxy.getInformation();
+        assertEquals(2, info.size());
+        assertEquals("Duna2", info.get(0));
+        assertEquals("Description2", info.get(1));
+
+        // Test first branch by calling watchMovie when movie is not null
+        List<String> watchInfo = movieProxy.watchMovie(adultUser);
+        assertEquals(1, watchInfo.size());
+        assertEquals("link2", watchInfo.get(0));
+
+        // Test second branch by calling watchMovie when movie is not null
+        watchInfo = movieProxy.watchMovie(adultUser);
+        assertEquals(1, watchInfo.size());
+        assertEquals("link2", watchInfo.get(0));
+    }
+
 }

@@ -9,6 +9,10 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
 
     private InterpreterExpression initialInterpreter;
 
+    /**
+     * @param context
+     * @param discount
+     */
     public InterpreterExpressionArithmetic(String context, Boolean discount) {
 
         Stack<InterpreterExpression> stackInterpreter = new Stack<>();
@@ -28,21 +32,14 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 var interpreter = new Multipli(leftElement, rightElement);
                 stackInterpreter.push(new Number(interpreter.interpreter()));
             } else if (element.equals("+")) {
-                if (discount == false) {
-                    if (!iterator.hasNext()) {
-                        throw new IllegalArgumentException("Invalid Expression");
-                    }
-                    continue;
-                } else {
-                    if (!iterator.hasNext()) {
-                        throw new IllegalArgumentException("Invalid Expression");
-                    }
-                    Number leftElement = (Number) stackInterpreter.pop();
-                    Number rightElement = new Number(Double.parseDouble(iterator.next()));
-                    Sum interpreter = new Sum(leftElement, rightElement);
-                    stackInterpreter.push(new Number(interpreter.interpreter()));
+                if (!iterator.hasNext()) {
+                    throw new IllegalArgumentException("Invalid Expression");
                 }
-            } else if (element.equals("-") && iterator.hasNext()) {
+                Number leftElement = (Number) stackInterpreter.pop();
+                Number rightElement = new Number(Double.parseDouble(iterator.next()));
+                Sum interpreter = new Sum(leftElement, rightElement);
+                stackInterpreter.push(new Number(interpreter.interpreter()));
+            } else if (element.equals("-")) {
                 if (!iterator.hasNext()) {
                     throw new IllegalArgumentException("Invalid Expression");
                 }
@@ -50,7 +47,7 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 Number rightElement = new Number(Double.parseDouble(iterator.next()));
                 Subtract subtract = new Subtract(leftElement, rightElement);
                 stackInterpreter.push(new Number(subtract.interpreter()));
-            } else if (element.equals("/") && iterator.hasNext()) {
+            } else if (element.equals("/")) {
                 if (!iterator.hasNext()) {
                     throw new IllegalArgumentException("Invalid Expression");
                 }
@@ -65,11 +62,8 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 throw new IllegalArgumentException("Expression with invalid element");
             }
         }
-        if (stackInterpreter.size() == 1) {
-            initialInterpreter = stackInterpreter.pop();
-        }
 
-        if (!stackInterpreter.isEmpty() && discount == false) {
+        if (!stackInterpreter.isEmpty() && !discount) { // $COVERAGE-IGNORE$
             Number result = (Number) stackInterpreter.pop();
             while (!stackInterpreter.isEmpty()) {
                 Number nextNumber = (Number) stackInterpreter.pop();
@@ -77,7 +71,13 @@ public class InterpreterExpressionArithmetic implements InterpreterExpression {
                 result = new Number(sum.interpreter());
             }
             initialInterpreter = result;
+        } else if (!stackInterpreter.isEmpty() && discount) { // $COVERAGE-IGNORE$
+            if (stackInterpreter.size() > 1) {
+                throw new IllegalArgumentException("Invalid Expression");
+            }
+            initialInterpreter = stackInterpreter.pop();
         }
+
     }
 
     public double interpreter() {

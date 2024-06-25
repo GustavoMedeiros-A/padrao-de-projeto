@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 public class ClientTest {
-    // public static String formula = "price * quantity - 1 / 2";
     @Test
     void shouldCalculateExpressionWithFormulaAndOneProduct() {
         ArrayList<Double> assertResults = new ArrayList<>();
@@ -22,11 +21,10 @@ public class ClientTest {
         var discounts = client.calcProductWithDiscount();
         assertResults.add(5.5);
         assertEquals(assertResults, discounts);
-
     }
 
     @Test
-    void shouldCalculateExpressionWithFormulaAndMoreThatOneProduct() {
+    void shouldCalculateExpressionWithFormulaAndMoreThanOneProduct() {
         ArrayList<Double> assertResults = new ArrayList<>();
         ArrayList<Product> products = new ArrayList<>();
 
@@ -41,11 +39,39 @@ public class ClientTest {
         assertResults.add(5.5);
         assertResults.add(4.5);
         assertEquals(assertResults, discounts);
-
     }
 
     @Test
-    void shoundCalculateTheFinalValueOfProductList() {
+    void shouldHandleNullProductList() {
+        var client = new Client("mario", null);
+        var discounts = client.calcProductWithDiscount();
+        assertEquals(new ArrayList<>(), discounts);
+    }
+
+    @Test
+    void shouldHandleEmptyProductList() {
+        var client = new Client("mario", new ArrayList<>());
+        var discounts = client.calcProductWithDiscount();
+        assertEquals(new ArrayList<>(), discounts);
+    }
+
+    @Test
+    void shouldHandleNullProductsInList() {
+        ArrayList<Double> assertResults = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
+
+        var soda = new Soda(3, "guarana", 4);
+        products.add(soda);
+        products.add(null);
+
+        var client = new Client("mario", products);
+        var discounts = client.calcProductWithDiscount();
+        assertResults.add(5.5);
+        assertEquals(assertResults, discounts);
+    }
+
+    @Test
+    void shouldCalculateTotalValueOfProductList() {
         var popcorn = new Popcorn(7, "popcorn", 2);
         var soda = new Soda(3, "coca", 2);
         var soda2 = new Soda(3, "guarana", 4);
@@ -57,6 +83,35 @@ public class ClientTest {
         var productConverter = utils.converterExpression(products);
         var interpreter = new InterpreterExpressionArithmetic(productConverter, false);
         assertEquals(32.0, interpreter.interpreter());
+    }
+
+    @Test
+    void testClientToString() {
+        var soda = new Soda(3, "guarana", 4);
+        var popcorn = new Popcorn(10, "popcorn", 1);
+
+        var products = new ArrayList<Product>();
+        products.add(soda);
+        products.add(popcorn);
+
+        var client = new Client("mario", products);
+        String expected = "Client{name='mario'\n, Products=[Product{name='guarana'\n, price=3, quantity=4}, Product{name='popcorn'\n, price=10, quantity=1}]}";
+        assertEquals(expected, client.toString());
+    }
+
+    @Test
+    void testClientToStringWithNullProducts() {
+        var soda = new Soda(3, "guarana", 4);
+        var popcorn = new Popcorn(10, "popcorn", 1);
+
+        var products = new ArrayList<Product>();
+        products.add(soda);
+        products.add(null);
+        products.add(popcorn);
+
+        var client = new Client("mario", products);
+        String expected = "Client{name='mario'\n, Products=[Product{name='guarana'\n, price=3, quantity=4}, null, Product{name='popcorn'\n, price=10, quantity=1}]}";
+        assertEquals(expected, client.toString());
     }
 
 }
